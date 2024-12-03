@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+    <header class="header">
+        <h1 onclick="window.location.href='index.html'">Skerp<span id="Spot">Spot</span></h1>
+            <div class="button-container">
+                <button  onclick="window.location.href='login.html'">LOGIN</button>
+                <button  onclick="window.location.href='register.html'">REGISTER</button>
+            
+            </div>
+     </header>
+    
+     <form action="http://localhost:3000/login" method="POST">
+        <label for="username">USERNAME/EMAIL:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">PASSWORD:</label>
+        <input type="password" id="password" name="password" required>
+        <button>LOGIN </button>
+    </form>
+</body>
+
+</html>

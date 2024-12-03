@@ -1,0 +1,81 @@
+body {
+    background-color: rgb(5, 5, 49); /* Set black background for the entire page */
+}
+
+#Spot {
+    color: darkgrey; /* White text for this specific element */
+}
+
+.header {
+    display: flex; /* Enable flexbox for the header */
+    justify-content: space-between; /* Space items in the header */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Padding around the header for spacing */
+}
+
+h1 {
+    color: rgb(255, 255, 255); /* Golden text color */
+    font-size: 40px; /* Large font size */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Bold fonts */
+    margin: 0; /* Remove default margin */
+}
+
+p {
+    color: white; /* White text color */
+    font-weight: bold; /* Bold text */
+    font-size: 18px; /* Increase font size for readability */
+    padding-left: 40px; /* Left padding for the paragraph */
+}
+
+.button-container {
+    display: flex; /* Flexbox layout for buttons */
+    gap: 10px; /* Gap between buttons */
+    
+}
+
+button {
+    
+    background-color: darkgrey; /* Dark magenta background color */
+    font-size: 25px; /* Large font size for buttons */
+    font-family: cursive; /* Cursive font for a playful style */
+    border-radius: 5px; /* Rounded corners for buttons */
+    color: rgb(255, 255, 255); /* White text color for buttons */
+    padding: 5px 20px; /* Padding inside buttons for height and width */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: rgba(253, 253, 253, 0.947); /* Lighter color on hover */
+    color: darkgrey; /* Change text color on hover */
+}
+
+form {
+    margin: 20px; /* Margin around the form */
+    padding: 30px; /* Add more padding for form */
+    background-color: rgba(255, 255, 255, 0.1); /* Light background color */
+    border-radius: 10px; /* Rounded corners */
+    max-width: 500px; /* Limit form width */
+    margin: 0 auto; /* Center the form horizontally */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+}
+
+label {
+    color: white; /* White text for labels */
+    font-size: 18px; /* Font size for readability */
+    display: block; /* Ensure labels are on their own lines */
+    margin-bottom: 10px; /* Increase space below labels */
+    font-weight: bold; /* Make labels bold */
+}
+
+input {
+    width: 100%; /* Input takes full width of the container */
+    padding: 10px; /* Padding inside input fields */
+    border: 1px solid white; /* White border for visibility */
+    border-radius: 5px; /* Rounded corners for input fields */
+    background-color: rgba(255, 255, 255, 0.2); /* Light background for input fields */
+    color: white; /* White text color for input */
+    font-size: 16px; /* Adjust font size */
+    margin-bottom: 20px; /* Increase spacing between input fields */
+}
+

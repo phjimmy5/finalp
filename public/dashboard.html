@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <h1>SPJ <span id="Spot">Chatroom</span></h1>
+        <div class="button-container">
+            <form action="/logout" method="GET">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </header>
+
+    <section id="chat-room">
+        <h2>Live Chat Room</h2>
+        <div id="welcome-message"></div>
+        <div id="messages-container">
+            <div id="messages"></div>
+        </div>
+        <form id="chat-form">
+            <input id="chat-input" type="text" placeholder="Enter your message" autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <script>
+        const socket = io();
+        let cooldown = false; // Track whether the user is on cooldown
+    
+        // Listen for the username event
+        socket.on('username', function (username) {
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeMessage.textContent = `Logged in as: ${username}`;
+            window.username = username; // Store username globally
+        });
+    
+        // Form submit handler
+        const chatForm = document.getElementById('chat-form');
+        chatForm.addEventListener('submit', handleFormSubmit);
+    
+        function handleFormSubmit(e) {
+            e.preventDefault();
+    
+            if (cooldown) {
+                alert('Please wait for 3 seconds before sending another message.');
+                return;
+            }
+    
+            const input = document.getElementById('chat-input');
+            if (input.value.trim() !== '') {
+                const message = `${window.username}: ${input.value}`;
+                socket.emit('chat message', message); // Emit the message to the server
+    
+                // Start a 3-second cooldown
+                cooldown = true;
+                setTimeout(() => {
+                    cooldown = false; // Reset cooldown after 3 seconds
+                }, 3000);
+    
+                input.value = ''; // Clear the input
+            }
+        }
+    
+        // Listen for messages from the server
+        socket.on('chat message', function (msg) {
+            const messages = document.getElementById('messages');
+            const messageElement = document.createElement('p');
+            messageElement.textContent = msg;
+            messages.appendChild(messageElement);
+    
+            // Scroll to the bottom of the messages container
+            const messagesContainer = document.getElementById('messages-container');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        });
+    </script>
+    
+    
+</body>
+
+</html>
+
