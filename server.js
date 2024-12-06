@@ -8,44 +8,44 @@ const session = require('express-session');
 const http = require('http');
 const socketIo = require('socket.io');
 
-// Initialize express app and server
+// start up the server
 const app = express();
 const port = 3000;
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Use body-parser middleware to parse form data
+// use middleware to send form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the public directory
+// serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up session middleware
+// initialize middlware
 const sessionMiddleware = session({
-  secret: 'yourSecretKey', // Replace with a strong secret
+  secret: 'SecretKey', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Set to true if using HTTPS
+  cookie: { secure: false } // not using https
 });
 
-// Use session middleware
+
 app.use(sessionMiddleware);
 
-// Initialize MySQL connection
+// initialize MySQL db connection
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root', // Replace with your DB username
-  password: process.env.DB_PASSWORD, // Replace with your DB password
-  database: 'sampledb' // Replace with your DB name
+  user: 'root', // my db username
+  password: process.env.DB_PASSWORD, // my db password (protected in .env file)
+  database: 'sampledb' // db name
 });
 
-// Connect to the database
+// connect to the database
 db.connect((err) => {
   if (err) throw err;
   console.log('Connected to MySQL database.');
 });
 
-// Route to handle the registration form submission
+//  handle the registration form submission
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -69,7 +69,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Route to handle the login form submission
+//handle the login form submission
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
@@ -93,7 +93,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Middleware to check if the user is logged in
+// middleware to check if the user is logged in
 function isAuthenticated(req, res, next) {
   if (req.session.user) {
     next();
@@ -102,12 +102,12 @@ function isAuthenticated(req, res, next) {
   }
 }
 
-// Route to serve the dashboard (protected)
+//route to get back to the dashboard (must be logged in)
 app.get('/dashboard', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-// Route to handle logout
+// route to handle logout button
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -117,21 +117,21 @@ app.get('/logout', (req, res) => {
   });
 });
 
-// Middleware to handle session for Socket.IO
+// middleware to handle session for Socket.IO
 io.use((socket, next) => {
   sessionMiddleware(socket.request, {}, next);
 });
 
-// Handle WebSocket connection for chat functionality
+
 io.on('connection', (socket) => {
   console.log('A user connected.');
 
-  // Check if user is authenticated
+  // check if user is authenticated
   if (socket.request.session && socket.request.session.user) {
-    const username = socket.request.session.user.username; // Get username from session
-    socket.emit('username', username); // Emit the username to the client
+    const username = socket.request.session.user.username; // retrieves username
+    socket.emit('username', username); 
 
-    // Load previous chat messages from the database when a user connects
+    // loads previous chat messages from the database when a user joins site
     db.query('SELECT * FROM chat_messages ORDER BY timestamp ASC', (err, results) => {
       if (err) throw err;
       results.forEach((row) => {
@@ -139,7 +139,7 @@ io.on('connection', (socket) => {
       });
     });
 
-    // Broadcast message to all users and save it to the database
+    // displays message to users and saves it
     socket.on('chat message', (msg) => {
       const [username, message] = msg.split(': '); // Assuming username is in the format 'username: message'
       const query = 'INSERT INTO chat_messages (username, message) VALUES (?, ?)';
@@ -148,12 +148,12 @@ io.on('connection', (socket) => {
         console.log('Message saved to database');
       });
 
-      // Emit the message to all connected users
+      
       io.emit('chat message', msg);
     });
   } else {
     console.error('User is not authenticated.');
-    socket.disconnect(); // Optionally disconnect the user if not authenticated
+    socket.disconnect(); //disconnects user if not logged in
   }
 
   socket.on('disconnect', () => {
@@ -161,7 +161,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// Start the server using the HTTP server, not app.listen()
+// initializes the server using local server
 server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

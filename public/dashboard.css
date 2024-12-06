@@ -1,52 +1,52 @@
 body {
-    background-color: rgb(5, 5, 49); /* Set black background for the entire page */
+    background-color: rgb(5, 5, 49); /* background of website: dark blue color (brings out features) */
 }
 
 #Spot {
-    color: white; /* White text for this specific element */
+    color: white; /* White text for the last part of word */
 }
 
 .header {
-    display: flex; /* Enable flexbox for the header */
-    justify-content: space-between; /* Space items in the header */
-    align-items: center; /* Center items vertically */
-    padding: 10px; /* Padding around the header for spacing */
+    display: flex; /* Enable flexbox for the header (needed to space everything correctly)*/
+    justify-content: space-between; /* Space items in the header (gives proper space between) */
+    align-items: center; /* this will center items in columns */ 
+    padding: 10px; /* padding for eye visuals */
 }
 
 h1 {
-    color: darkgrey; /* Custom color */
-    font-size: 40px; /* Large font size */
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Bold fonts */
-    margin: 0; /* Remove default margin */
+    color: darkgrey; /* dark grey color for header */
+    font-size: 40px; /* large font size for header*/
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* font type */
+    margin: 0; /* set default margin to 0 */
 }
 
 p {
-    color: white; /* White text color */
-    font-weight: bold; /* Bold text */
-    font-size: 18px; /* Increase font size for readability */
-    padding-left: 40px; /* Left padding for the paragraph */
+    color: white; /* color of text */
+    font-weight: bold; /* bold text */
+    font-size: 18px; /* small font size for paragraph */
+    padding-left: 40px; /* left padding for the paragraph */
 }
 
 .button-container {
-    display: flex; /* Flexbox layout for buttons */
-    gap: 10px; /* Gap between buttons */
+    display: flex; /* flexbox layout for buttons */
+    gap: 10px; /* space between buttons */
 }
 
-/* Button styles from script 1 */
+
 button {
-    background-color: darkgrey; /* Dark magenta background color */
-    font-size: 25px; /* Large font size for buttons */
-    font-family: cursive; /* Cursive font for a playful style */
-    border-radius: 5px; /* Rounded corners for buttons */
-    color: rgb(255, 255, 255); /* White text color for buttons */
-    padding: 5px 20px; /* Padding inside buttons for height and width */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    background-color: darkgrey; /* dark grey background color */
+    font-size: 25px; /* large font size for buttons */
+    font-family: cursive; /* cursive font*/
+    border-radius: 5px; /* rounded corners for buttons */
+    color: rgb(255, 255, 255); /* white text color for buttons */
+    padding: 5px 20px; /* padding inside forum where buttons are for height and width */
+    cursor: pointer; /*change cursor to pointer on hover */
+    transition: background-color 0.3s; /* smooth transition hover effect */
 }
 
 button:hover {
-    background-color: rgba(253, 253, 253, 0.947); /* Lighter color on hover */
-    color: darkgrey; /* Change text color on hover */
+    background-color: rgba(253, 253, 253, 0.947); /* lighter color on hover */
+    color: darkgrey; /* change text color on hover */
 }
 
 #chat-room {
@@ -56,10 +56,10 @@ button:hover {
 }
 
 #messages-container {
-    height: 400px; /* Set a fixed height for the chat area */
-    overflow-y: auto; /* Enables vertical scrolling */
+    height: 400px; /* set a fixed height for the chat area */
+    overflow-y: auto; /* enables vertical scrolling */
     border: 10px solid #fbf9f9;
-    border-radius: 15px; /* Adds rounded corners */
+    border-radius: 15px; /* adds rounded corners */
     padding: 1rem;
     margin-bottom: 1rem;
     background-color: darkgrey;
@@ -68,7 +68,7 @@ button:hover {
 #messages p {
     margin-bottom: 0.5rem;
     color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
 }
 
 #chat-form {
@@ -81,21 +81,21 @@ button:hover {
     padding: 0.5rem;
 }
 
-/* Submit button style using the button styling */
+
 button[type="submit"] {
-    padding: 5px 20px; /* Adjust padding for form button */
-    background-color: darkgrey; /* Dark magenta background color to match other buttons */
-    color: white; /* White text */
+    padding: 5px 20px; /* adjust padding for form button */
+    background-color: darkgrey; /* dark grey background color to match other buttons */
+    color: white; /* white text */
     border: none;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px; /* rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition */
-    font-size: 25px; /* Slightly smaller font size */
+    transition: background-color 0.3s; /* smooth transition */
+    font-size: 25px; 
 }
 
 button[type="submit"]:hover {
-    background-color: rgba(253, 253, 253, 0.947); /* Hover color */
-    color: darkgrey; /* Text color change on hover */
+    background-color: rgba(253, 253, 253, 0.947); /* hover color */
+    color: darkgrey; /*  color change on hover */
 }
 
 h2{

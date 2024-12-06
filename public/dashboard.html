@@ -31,59 +31,70 @@
         </form>
     </section>
 
+   
+    <audio id="notification-sound" src="/mixkit-dry-pop-up-notification-alert-2356.wav" preload="auto"></audio>
+
     <script>
         const socket = io();
-        let cooldown = false; // Track whether the user is on cooldown
-    
-        // Listen for the username event
+        let cooldown = false; 
+
+        //wait for the username event
         socket.on('username', function (username) {
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.textContent = `Logged in as: ${username}`;
-            window.username = username; // Store username globally
+            window.username = username; //stores the username
         });
-    
-        // Form submit handler
+
+        //form submit handler
         const chatForm = document.getElementById('chat-form');
         chatForm.addEventListener('submit', handleFormSubmit);
-    
+
         function handleFormSubmit(e) {
             e.preventDefault();
-    
+
             if (cooldown) {
                 alert('Please wait for 3 seconds before sending another message.');
                 return;
             }
-    
+
             const input = document.getElementById('chat-input');
             if (input.value.trim() !== '') {
-                const message = `${window.username}: ${input.value}`;
-                socket.emit('chat message', message); // Emit the message to the server
-    
-                // Start a 3-second cooldown
+                const message = {
+                    sender: window.username,
+                    text: input.value
+                };
+                socket.emit('chat message', message);
+
+                // start a 3 second cooldown
                 cooldown = true;
                 setTimeout(() => {
-                    cooldown = false; // Reset cooldown after 3 seconds
+                    cooldown = false; // reset cooldown after 3 seconds
                 }, 3000);
-    
-                input.value = ''; // Clear the input
+
+                input.value = ''; 
             }
         }
-    
-        // Listen for messages from the server
-        socket.on('chat message', function (msg) {
+
+        //wait for messages from the server
+        socket.on('chat message', function (data) {
+            const { sender, text } = data;
             const messages = document.getElementById('messages');
             const messageElement = document.createElement('p');
-            messageElement.textContent = msg;
+            messageElement.textContent = `${sender}: ${text}`;
             messages.appendChild(messageElement);
-    
-            // Scroll to the bottom of the messages container
+
+            //play the notification sound if a user sends a message
+            if (sender !== window.username) {
+                const notificationSound = document.getElementById('notification-sound');
+                notificationSound.play();
+            }
+
+            //scroll to the bottom of the messages container
             const messagesContainer = document.getElementById('messages-container');
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         });
     </script>
-    
-    
+
 </body>
 
 </html>
-

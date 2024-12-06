@@ -1,14 +1,14 @@
--- Step 1: Create the database (optional)
+-- establish the db
 CREATE DATABASE IF NOT EXISTS sampledb;
 USE sampledb;
 
--- Step 2: Create the users table
+-- create users table
 CREATE TABLE IF NOT EXISTS userinfo (
-    id INT AUTO_INCREMENT PRIMARY KEY,      -- Unique ID for each user
-    username VARCHAR(50) NOT NULL UNIQUE,   -- Username field (must be unique)
-    email VARCHAR(100) NOT NULL UNIQUE,     -- Email field (must be unique)
-    password_hash VARCHAR(255) NOT NULL,    -- Password hash (store hashed passwords)
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Automatically sets the timestamp on account creation
+    id INT AUTO_INCREMENT PRIMARY KEY,      -- unique integer for each user
+    username VARCHAR(50) NOT NULL UNIQUE,   -- username field (must be unique)
+    email VARCHAR(100) NOT NULL UNIQUE,     -- email field (must be unique)
+    password_hash VARCHAR(255) NOT NULL,    -- password hash (store hashed passwords)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- sets the timestamp on account creation
 );
 
 CREATE TABLE IF NOT EXISTS chat_messages (
